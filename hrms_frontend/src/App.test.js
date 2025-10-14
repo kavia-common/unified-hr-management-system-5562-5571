@@ -1,8 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders HRMS welcome headline', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const headline = screen.getByText(/Welcome to HRMS/i);
+  expect(headline).toBeInTheDocument();
+});
+
+test('does not render CRA boilerplate text', () => {
+  render(<App />);
+  const craEditHint = screen.queryByText(/Edit src\/App\.js and save to reload\./i);
+  const learnReact = screen.queryByText(/learn react/i);
+  expect(craEditHint).toBeNull();
+  expect(learnReact).toBeNull();
 });
